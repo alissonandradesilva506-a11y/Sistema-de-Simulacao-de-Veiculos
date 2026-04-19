@@ -1,8 +1,8 @@
 public class SimulVeiculo{
     public class Veiculo{
-        private String marca;
-        private String modelo;
-        private int velocidade;
+        protected String marca;
+        protected String modelo;
+        protected int velocidade;
         
         public Veiculo(String marca, String modelo){
             this.marca = marca;
