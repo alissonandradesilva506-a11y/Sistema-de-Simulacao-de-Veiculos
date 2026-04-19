@@ -27,6 +27,24 @@ public class SimulVeiculo{
         public void setVelocidade(int velocidade){
             this.velocidade = velocidade;
         }
+        public void acelerar(){
+            this.velocidade += 10;
+        }
+        public void frear(){
+            this.velocidade -= 10;
+            if(this.velocidade < 0) this.velocidade=0;
+        }
+        public void acelerar(int incremento){
+            this.velocidade += incremento;
+        }
+        public void frear(int decremento){
+            this.velocidade -= decremento;
+            if(this.velocidade < 0) this.velocidade=0;
+        }
+        @Override
+        public String toString() {
+            return "Veículo: " + marca + " " + modelo + " - Velocidade: " + velocidade + " km/h";
+        }
     }
     
     public class Carro extends Veiculo{
@@ -38,32 +56,18 @@ public class SimulVeiculo{
             super(marca, modelo);
             setVelocidade(velocidadeInicial);
         }
-        public void acelerar() {
-            setVelocidade((int) (getVelocidade() + 10));
-        }
-        public void frear() {
-            setVelocidade((int) (getVelocidade() - 10));
-            if (getVelocidade() < 0) setVelocidade(0);
-        }
-        public void acelerar(int incremento) {
-            setVelocidade((int) (getVelocidade() + incremento));
-        }
-        public void frear(int decremento) {
-            setVelocidade((int) (getVelocidade() - decremento));
-            if (getVelocidade() < 0) setVelocidade(0);
-        }
         @Override
         public String toString() {
             return "Carro: " + getMarca() + " " + getModelo() + " - Velocidade: " + getVelocidade() + " km/h";
         }
     }
     public class Garagem{
-        private Carro[] vagas;
+        private Veiculo[] vagas;
         
         public Garagem(int tamanho){
-            this.vagas = new Carro[tamanho];
+            this.vagas = new Veiculo[tamanho];
         }
-        public void estacionarCarro(int vaga, Carro carro){
+        public void estacionar(int vaga, Veiculo carro){
             if (vaga >= 0 && vaga < vagas.length){
                 vagas[vaga] = carro;
                 System.out.println("Carro estacionado na vaga "+vaga);
