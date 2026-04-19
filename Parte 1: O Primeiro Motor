@@ -1,0 +1,85 @@
+public class SimulVeiculo{
+    public class Veiculo{
+        private String marca;
+        private String modelo;
+        private int velocidade;
+        
+        public Veiculo(String marca, String modelo){
+            this.marca = marca;
+            this.modelo = modelo;
+            this.velocidade = 0;
+        }
+        public String getMarca(){
+            return marca;
+        }
+        public String getModelo(){
+            return modelo;
+        }
+        public double getVelocidade(){
+            return velocidade;
+        }
+        public void setMarca(String marca){
+            this.marca = marca;
+        }
+        public void setModelo(String modelo){
+            this.modelo = modelo;
+        }
+        public void setVelocidade(int velocidade){
+            this.velocidade = velocidade;
+        }
+    }
+    
+    public class Carro extends Veiculo{
+        public Carro(String marca, String modelo) {
+            super(marca, modelo);
+            setVelocidade(0);
+        }
+        public Carro(String marca, String modelo, int velocidadeInicial) {
+            super(marca, modelo);
+            setVelocidade(velocidadeInicial);
+        }
+        public void acelerar() {
+            setVelocidade((int) (getVelocidade() + 10));
+        }
+        public void frear() {
+            setVelocidade((int) (getVelocidade() - 10));
+            if (getVelocidade() < 0) setVelocidade(0);
+        }
+        public void acelerar(int incremento) {
+            setVelocidade((int) (getVelocidade() + incremento));
+        }
+        public void frear(int decremento) {
+            setVelocidade((int) (getVelocidade() - decremento));
+            if (getVelocidade() < 0) setVelocidade(0);
+        }
+        @Override
+        public String toString() {
+            return "Carro: " + getMarca() + " " + getModelo() + " - Velocidade: " + getVelocidade() + " km/h";
+        }
+    }
+    public class Garagem{
+        private Carro[] vagas;
+        
+        public Garagem(int tamanho){
+            this.vagas = new Carro[tamanho];
+        }
+        public void estacionarCarro(int vaga, Carro carro){
+            if (vaga >= 0 && vaga < vagas.length){
+                vagas[vaga] = carro;
+                System.out.println("Carro estacionado na vaga "+vaga);
+            }else{
+                System.out.println("Vaga inválida.");
+            }
+        }
+        public void listarGaragem(){
+            System.out.println("--- Relatório da Garagem ---");
+            for (int i=0; i < vagas.length; i++){
+                if (vagas[i] !=null){
+                    System.out.println("Vaga "+ i +": "+ vagas[i].toString());
+                }else{
+                    System.out.println("Vaga "+ i +": vazia");
+                }
+            }
+        }
+    }
+}
